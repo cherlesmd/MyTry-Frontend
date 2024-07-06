@@ -9,7 +9,7 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
     console.log(tries[index].location.x);
     try {
       const response = await api.delete(
-        `/api/v1/tries/661f43c121e852e0fdc00e81?name=${tries[index].name}&longitude=${tries[index].location.x}&latitude=${tries[index].location.y}`,
+        `/tries/661f43c121e852e0fdc00e81?name=${tries[index].name}&longitude=${tries[index].location.x}&latitude=${tries[index].location.y}`,
       );
       const updatedTries = tries.filter((_, i) => i !== index);
       setTries(updatedTries);

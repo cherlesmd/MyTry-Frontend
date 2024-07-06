@@ -38,7 +38,7 @@ function App() {
   const getTries = async (bDistance) => {
     try {
       const response = await api.get(
-        `/api/v1/tries/661f43c121e852e0fdc00e81?longitude=${lng}&latitude=${lat}&distance=${bDistance}`,
+        `/tries/661f43c121e852e0fdc00e81?longitude=${lng}&latitude=${lat}&distance=${bDistance}`,
       );
       setTries(response.data);
       console.log(response.data);
