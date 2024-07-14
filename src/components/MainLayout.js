@@ -11,6 +11,7 @@ const MainLayout = ({
   lat,
   setLat,
 }) => {
+
   const [feature, setFeature] = useState();
   return (
     <main className="flex justify-between w-11/12 mx-auto px-36 pt-8">

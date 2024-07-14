@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState, Fragment } from "react";
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import mapboxgl from "!mapbox-gl";
-import Search from "../search/Search";
 
 mapboxgl.accessToken =
   "";

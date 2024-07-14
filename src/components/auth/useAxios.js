@@ -1,37 +1,35 @@
-import { useEffect } from "react";
-import useAuth from "./useAuth";
+import { useContext, useEffect } from "react";
+import AuthContext from "../auth/AuthPovider";
 import useRefreshToken from "./useRefreshToken";
-import api from "../../api";
+import { axiosPrivate } from "../../api/axiosConfig";
 
 const useAxios = () => {
   const refresh = useRefreshToken();
-  const { auth } = useAuth();
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
-    const authInterceptor = api.interceptors.request.use(
+    const authInterceptor = axiosPrivate.interceptors.request.use(
       (config) => {
         if (!config.headers.Authorization) {
-          config.headers.Authorization = `Bearer ${auth?.accessToken}`;
+          config.headers.Authorization = `Bearer: ${auth?.accessToken}`;
         }
+        console.log(config);
 
         return config;
       },
       (error) => Promise.reject(error),
     );
 
-    const refreshInterceptor = api.interceptors.response.use(
+    const refreshInterceptor = axiosPrivate.interceptors.response.use(
       (response) => response,
       async (error) => {
         const originalRequest = error?.config;
 
-        if (
-          error.response.status === 403 &&
-          error.response.data.message === "Unauthorized"
-        ) {
-          const accessToken = refresh();
-          originalRequest.headers.Authorization = `Bearer ${accessToken}`;
-          originalRequest._retry = true;
-          return api(originalRequest);
+        if (error.response.status === 403 && !originalRequest?.sent) {
+          originalRequest.sent = true;
+          const accessToken = await refresh();
+          originalRequest.headers.Authorization = `Bearer: ${accessToken}`;
+          return axiosPrivate(originalRequest);
         }
 
         return Promise.reject(error);
@@ -39,10 +37,12 @@ const useAxios = () => {
     );
 
     return () => {
-      api.interceptors.request.ejec(refreshInterceptor);
-      api.interceptors.response.eject(authInterceptor);
+      axiosPrivate.interceptors.request.eject(authInterceptor);
+      axiosPrivate.interceptors.response.eject(refreshInterceptor);
     };
   }, [auth, refresh]);
+
+  return axiosPrivate;
 };
 
 export default useAxios;

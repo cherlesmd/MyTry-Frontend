@@ -7,7 +7,6 @@ function classNames(...classes) {
 
 const DistanceButton = (prop) => {
   function clickedDistance(d) {
-    console.log(d.target.value);
     prop.getDistance(d.target.value);
   }
 

@@ -1,18 +1,32 @@
 import { Fragment } from "react";
-import api from "../../api/axiosConfig";
+import useAxios from "../auth/useAxios";
 import DistanceButton from "../button/DistanceButton";
 import Search from "../search/Search";
 
 const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
+  const axiosPrivate = useAxios();
 
   const deleteTry = async (index) => {
     console.log(tries[index].location.x);
+
     try {
-      const response = await api.delete(
-        `/tries/661f43c121e852e0fdc00e81?name=${tries[index].name}&longitude=${tries[index].location.x}&latitude=${tries[index].location.y}`,
-      );
+      const name = tries[index].name;
+      const longitude = tries[index].location.x;
+      const latitude = tries[index].location.y;
+
+      const response = await axiosPrivate({
+        method: "delete",
+        url: "/tries",
+        params: {
+          name,
+          longitude,
+          latitude,
+        },
+      });
+
       const updatedTries = tries.filter((_, i) => i !== index);
       setTries(updatedTries);
+
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +35,12 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
   return (
     <Fragment>
       <ul>
-        <Search feature={feature} setFeature={setFeature} tries={tries} setTries={setTries}></Search>
+        <Search
+          feature={feature}
+          setFeature={setFeature}
+          tries={tries}
+          setTries={setTries}
+        ></Search>
         <DistanceButton getDistance={getDistance}></DistanceButton>
         {tries?.map((item, index) => {
           return (

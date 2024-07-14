@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../api/axiosConfig";
-import useAuth from "../auth/useAuth";
+import {axiosInstance} from "../../api/axiosConfig";
+import AuthContext from "../auth/AuthPovider";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -9,7 +9,7 @@ function SignUp() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { setAuth } = useAuth();
+  const { setAuth } = useContext(AuthContext);
 
   const handle_signup = async () => {
     try {
@@ -18,7 +18,7 @@ function SignUp() {
         return;
       }
 
-      const response = await api.post("/auth/register", {
+      const response = await axiosInstance.post("/auth/register", {
         email,
         username,
         password,
@@ -26,7 +26,7 @@ function SignUp() {
 
       const accessToken = response.data.accessToken;
       const refreshToken = response.data.refreshToken;
-      setAuth({ email, username, password, accessToken, refreshToken });
+      setAuth({ accessToken, refreshToken });
       console.log(response.data);
 
       navigate("/dash");
