@@ -14,7 +14,7 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
       const longitude = tries[index].location.x;
       const latitude = tries[index].location.y;
 
-      const response = await axiosPrivate({
+      await axiosPrivate({
         method: "delete",
         url: "/tries",
         params: {
@@ -26,14 +26,13 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
 
       const updatedTries = tries.filter((_, i) => i !== index);
       setTries(updatedTries);
-
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <Fragment>
+    <div className="">
       <ul>
         <Search
           feature={feature}
@@ -44,14 +43,20 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
         <DistanceButton getDistance={getDistance}></DistanceButton>
         {tries?.map((item, index) => {
           return (
-            <li key={index} className="h-8 mb-3 pt-1">
-              <span>{item.name}</span>
-              <button onClick={() => deleteTry(index)}> - </button>
+            <li key={index} className="pt-3 mb-3 flex justify-between">
+              <span className="pr-2">{item.name}</span>
+              <button
+                className="text-red-500 text-2xl"
+                onClick={() => deleteTry(index)}
+              >
+                {" "}
+                --{" "}
+              </button>
             </li>
           );
         })}
       </ul>
-    </Fragment>
+    </div>
   );
 };
 export default UserTries;

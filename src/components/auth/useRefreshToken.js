@@ -1,22 +1,31 @@
 import AuthContext from "../auth/AuthPovider";
-import {axiosInstance} from "../../api/axiosConfig";
+import { axiosInstance } from "../../api/axiosConfig";
 import { useContext } from "react";
 
 const useRefreshToken = () => {
-    const { auth, setAuth } = useContext(AuthContext);
+  const { setAuth } = useContext(AuthContext);
 
-    const refresh = async () => {
-        const response = await axiosInstance({method: "post", url: "/auth/refresh-token", 
-            headers: { "Authorization": `Bearer: ${auth.refreshToken}` },
-        });
+  const refresh = async () => {
 
-        setAuth((prev) => {
-            return { ...prev, accessToken: response.data.accessToken };
-        });
-        return response.data.accessToken;
-    };
+    try {
+      const response = await axiosInstance({
+        method: "post",
+        url: "/auth/refresh-token",
+      });
 
-    return refresh;
+      setAuth((prev) => {
+        return { ...prev, accessToken: response.data.accessToken };
+      });
+      return response.data.accessToken;
+
+    } catch (error) {
+      console.log(error);
+      localStorage.clear();
+      setAuth({});
+    }
+  };
+
+  return refresh;
 };
 
 export default useRefreshToken;

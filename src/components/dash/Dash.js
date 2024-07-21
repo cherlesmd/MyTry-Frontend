@@ -12,6 +12,7 @@ const Dash = () => {
   const [lat, setLat] = useState(null);
   const [distance, setDistance] = useState("0");
   const axiosPrivate = useAxios();
+  const [status, setStatus] = useState(false);
 
   useEffect(() => {
     const fetchLocation = () => {
@@ -37,12 +38,12 @@ const Dash = () => {
 
   const getTries = async (dist) => {
     try {
-      console.log(lng, lat, dist);
       const response = await axiosPrivate({
         method: "get",
         url: "/tries",
         params: { longitude: lng, latitude: lat, distance: parseInt(dist) },
       });
+
       setTries(response.data);
     } catch (error) {
       console.log(error);
@@ -52,9 +53,14 @@ const Dash = () => {
   const getDistance = (data) => {
     setDistance(data);
     getTries(data);
+    setTimeout(triesStatus, 1000);
   };
 
-  return distance === "0" ? (
+  function triesStatus() {
+    setStatus(true);
+  }
+
+  return status === false ? (
     <div className="box-border text-center">
       <Header />
       <Routes>

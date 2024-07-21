@@ -11,10 +11,9 @@ const MainLayout = ({
   lat,
   setLat,
 }) => {
-
   const [feature, setFeature] = useState();
   return (
-    <main className="flex justify-between w-11/12 mx-auto px-36 pt-8">
+    <main className="grid grid-cols-1 gap-28 lg:grid-cols-2 mx-auto px-36 pt-8 h-[80svh]">
       <UserTries
         tries={tries}
         setTries={setTries}
@@ -22,7 +21,13 @@ const MainLayout = ({
         feature={feature}
         setFeature={setFeature}
       ></UserTries>
-      <Map lng={lng} setLng={setLng} lat={lat} setLat={setLat}></Map>
+      <Map
+        lng={lng}
+        setLng={setLng}
+        lat={lat}
+        setLat={setLat}
+        tries={tries}
+      ></Map>
     </main>
   );
 };

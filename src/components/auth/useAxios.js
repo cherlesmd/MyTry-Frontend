@@ -13,7 +13,6 @@ const useAxios = () => {
         if (!config.headers.Authorization) {
           config.headers.Authorization = `Bearer: ${auth?.accessToken}`;
         }
-        console.log(config);
 
         return config;
       },

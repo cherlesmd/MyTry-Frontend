@@ -1,16 +1,32 @@
 import React from "react";
+import AuthContext from "../auth/AuthPovider";
+import { useContext } from "react";
+import useAxios from "../auth/useAxios";
 
 const Header = () => {
-    return (
-        <nav className="h-16 flex gap-10 justify-between mt-1 mb-6 mx-4">
-            <div className="flex items-center flex-shrink-0">
-                <a href="/">My Try</a>
-            </div>
-            <div className="flex flex-shrink-0 justify-between md:gap-3 items-center">
-                <a href="/">itinerary</a>
-                <a href="/">Profile</a>
-            </div>
-        </nav>
-    );
+  const { setAuth } = useContext(AuthContext);
+  const axiosPrivate = useAxios();
+
+  const handleLogout = async () => {
+    await axiosPrivate({
+      method: "post",
+      url: "/auth/logout",
+    });
+    window.localStorage.clear();
+    setAuth({});
+  };
+
+  return (
+    <nav className="h-16 flex gap-10 justify-between mt-1 mb-6 mx-4">
+      <div className="flex items-center flex-shrink-0">
+        <p>My Try</p>
+      </div>
+      <div className="flex flex-shrink-0 justify-between md:gap-3 items-center">
+        <button type="submit" onClick={handleLogout}>
+          Sign out
+        </button>
+      </div>
+    </nav>
+  );
 };
 export default Header;
