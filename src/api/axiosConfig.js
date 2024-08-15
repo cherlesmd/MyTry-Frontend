@@ -12,3 +12,7 @@ export const axiosPrivate = axios.create({
   withCredentials: true,
 });
 
+axiosInstance.interceptors.request.use(res => {
+  console.log(res)
+  return res;
+}, error => Promise.reject(error));
