@@ -1,13 +1,13 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://54.183.163.123:8080/api/v1",
+  baseURL: "https://www.mytrybackend.codes/api/v1",
   timeout: 20000,
   withCredentials: true,
 });
 
 export const axiosPrivate = axios.create({
-  baseURL: "https://54.183.163.123:8080/api/v1",
+  baseURL: "https://www.mytrybackend.codes/api/v1",
   headers: { "Content-Type": "application/json" },
   withCredentials: true,
 });
