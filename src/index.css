@@ -1,3 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    box-sizing: border-box;
+}
+
+span {
+    color: #a3ee59;
+    left: calc(var(--offset) * 1ch + calc(var(--offset) * 0.2ch));
+    animation: flicker 3s linear infinite;
+
+    top: 0;
+    z-index: 1;
+}
+
+@keyframes flicker {
+
+    0%,
+    19.9%,
+    22%,
+    62.9%,
+    64%,
+    64.9%,
+    70%,
+    100% {
+        opacity: 0.99;
+        text-shadow:
+            -1px -1px 0 rgba(255, 255, 255, 0.4),
+            1px -1px 0 rgba(255, 255, 255, 0.4),
+            -1px 1px 0 rgba(255, 255, 255, 0.4),
+            1px 1px 0 rgba(255, 255, 255, 0.4),
+            0 -2px 8px,
+            0 0 2px,
+            0 0 5px #55901b,
+            0 0 15px #9e95e9,
+            0 0 2px #55901b,
+            0 2px 3px #000;
+    }
+
+    20%,
+    21.9%,
+    63%,
+    63.9%,
+    65%,
+    69.9% {
+        opacity: 0.4;
+        text-shadow: none;
+    }
+}
+
+.container,
+.container .card {
+    position: absolute;
+    width: 200px;
+    height: 200px127836;
+    transition: 0.7s;
+}
+
+.container {
+    top: 30%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+}
+
+.container:hover {
+    left: 30%;
+    top: 15%;
+}
+
+.container .card:hover {
+    z-index: 1;
+    box-shadow: 0 10px 100px #e46955;
+}
+
+.container:hover .card:nth-child(2) {
+    transform: translate(50px, 50px);
+}
+
+.container:hover .card:nth-child(3) {
+    transform: translate(30px, 120px);
+}
+
+.container:hover .card:nth-child(4) {
+    transform: translate(250px, 120px);
+}
+
+.container:hover .card:nth-child(5) {
+    transform: translate(200px, 200px);
+}
+
+.container:hover .card:nth-child(6) {
+    transform: translate(250px, 250px);
+}
+
+.container:hover .card:nth-child(7) {
+    transform: translate(300px, 20px);
+}
+
+.container:hover .card:nth-child(8) {
+    transform: translate(40px, 300px);
+}
+
+.container:hover .card:nth-child(9) {
+    transform: translate(300px, 300px);
+}
+
+.container:hover .card:nth-child(10) {
+    transform: translate(270px, 200px);
+}
+
+@media (max-width: 800px) {
+    .container:hover .card:nth-child(2) {
+        transform: translate(0px, 50px);
+    }
+
+    .container:hover .card:nth-child(3) {
+        transform: translate(0px, 100px);
+    }
+
+    .container:hover .card:nth-child(4) {
+        transform: translate(0px, 150px);
+    }
+
+    .container:hover .card:nth-child(5) {
+        transform: translate(0px, 200px);
+    }
+
+    .container:hover .card:nth-child(6) {
+        transform: translate(0px, 250px);
+    }
+
+    .container:hover .card:nth-child(7) {
+        transform: translate(0px, 300px);
+    }
+
+    .container:hover .card:nth-child(8) {
+        transform: translate(0px, 350px);
+    }
+
+    .container:hover .card:nth-child(9) {
+        transform: translate(0px, 400px);
+    }
+
+    .container:hover .card:nth-child(10) {
+        transform: translate(0px, 450px);
+    }
+
+    .container:hover {
+        top: 35%;
+        left: 50%;
+    }
+}
+
+.auth-form {
+    max-width: 700px;
+    padding: 1rem 3rem 1rem 3rem;
+    color: black;
+    height: auto;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.field {
+    width: 100%;
+    position: relative;
+    border-bottom: 2px dashed black;
+    margin: 4rem auto 1rem;
+}
+
+.field::after {
+    content: "";
+    position: relative;
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: #9e95e9;
+    transform: scaleX(0);
+    transform-origin: 0%;
+    transition: transform 500ms ease;
+    top: 2px;
+}
+
+.field:focus-within {
+    border-color: transparent;
+}
+
+.field:focus-within::after {
+    transform: scaleX(1);
+}
+
+.label {
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    transform-origin: 0%;
+    transition: transform 400ms;
+}
+
+.input {
+    outline: none;
+    border: none;
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+    padding: 0.25rem 0;
+    background: none;
+    color: black;
+    font-size: 1.2rem;
+}
+
+
+.field:focus-within .label,
+.input:not(:placeholder-shown)+.label {
+    transform: scale(0.8) translateY(-3rem);
+}

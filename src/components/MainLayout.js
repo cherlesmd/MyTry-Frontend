@@ -13,7 +13,7 @@ const MainLayout = ({
 }) => {
   const [feature, setFeature] = useState();
   return (
-    <main className="grid grid-cols-1 gap-28 lg:grid-cols-2 mx-auto px-36 pt-8 h-[80svh]">
+    <main className="font-inter grid grid-cols-1 gap-28 lg:grid-cols-2 mx-auto px-36 pt-8 h-[80svh]">
       <UserTries
         tries={tries}
         setTries={setTries}

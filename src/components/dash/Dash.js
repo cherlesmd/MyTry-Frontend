@@ -61,7 +61,7 @@ const Dash = () => {
   }
 
   return status === false ? (
-    <div className="box-border text-center">
+    <div className="font-inter box-border text-center">
       <Header />
       <Routes>
         <Route
