@@ -1,7 +1,8 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import useAxios from "../auth/useAxios";
 import DistanceButton from "../button/DistanceButton";
 import Search from "../search/Search";
+import Collapsible from "./Collapsible";
 
 const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
   const axiosPrivate = useAxios();
@@ -41,20 +42,20 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
           setTries={setTries}
         ></Search>
         <DistanceButton getDistance={getDistance}></DistanceButton>
-        {tries?.map((item, index) => {
-          return (
-            <li key={index} className="pt-3 mb-3 flex justify-between">
-              <span className="pr-2">{item.name}</span>
-              <button
-                className="text-red-500 text-2xl"
-                onClick={() => deleteTry(index)}
-              >
-                {" "}
-                --{" "}
-              </button>
-            </li>
-          );
-        })}
+        <div className="pt-8">
+          {tries?.map((item, index) => {
+            return (
+              <li key={index} className="pt-4 mb-3 w-full">
+                <Collapsible
+                  tryName={item.name}
+                  address={item.address}
+                  deleteTry={deleteTry}
+                  index={index}
+                />
+              </li>
+            );
+          })}
+        </div>
       </ul>
     </div>
   );

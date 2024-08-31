@@ -11,7 +11,8 @@ const Login = () => {
   const { setAuth, persist, setPersist } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       if (!username || !password) {
         setError("Fill in all fields");

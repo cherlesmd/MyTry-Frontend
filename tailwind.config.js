@@ -12,7 +12,7 @@ module.exports = {
       accent: "#e46955",
     },
 
-    extend: { fontFamily: { 'inter': ["Inter", "ui-sans-serif"] } },
+    extend: { fontFamily: { 'inter': ["Inter", "sans-serif"] } },
   },
   plugins: [],
 };

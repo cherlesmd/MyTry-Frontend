@@ -18,7 +18,7 @@ const Home = () => {
             <div className=" mb-12 ">
               <h1 className="text-6xl font-bold">
                 M
-                <span className="" aria-hidden="true">
+                <span className="flicker-effect" aria-hidden="true">
                   y
                 </span>
                 Try
@@ -34,14 +34,14 @@ const Home = () => {
                 Easily find what you have saved near you on your night out
               </p>
             </div>
-            <div className="flex flex-row justify-evenly md:justify-start space-x-7 mt-4 pt-4 text-xl">
+            <div className="flex flex-row justify-between md:justify-start space-x-7 mt-4 pt-4 text-xl">
               <Link to="/login">
-                <button className="border-x-primary border-y-background border-x-2 py-2 px-5 rounded-3xl hover:rounded hover:bg-primary  duration-300">
+                <button className="bg-primary border-[#89c74c] border-2 py-2 px-5 rounded hover:rounded-3xl duration-300">
                   Login
                 </button>
               </Link>
               <Link to="/sign-up">
-                <button className="border-x-secondary border-y-background border-x-2 py-2 px-3 rounded-3xl hover:rounded hover:bg-secondary  duration-300">
+                <button className="bg-secondary border-[#7b74b3] border-2 py-2 px-5 rounded hover:rounded-3xl duration-300">
                   Sign up
                 </button>
               </Link>

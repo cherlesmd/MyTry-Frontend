@@ -28,7 +28,7 @@ const Map = ({ lng, setLng, lat, setLat, tries }) => {
         console.log(tries);
         for (const feature of tries) {
             new mapboxgl.Marker({
-                color: "orange",
+                color: "#a3ee59",
                 draggable: false,
             })
                 .setLngLat(feature.location.coordinates)
