@@ -12,7 +12,8 @@ function SignUp() {
   const navigate = useNavigate();
   const { setAuth, persist, setPersist } = useContext(AuthContext);
 
-  const handle_signup = async () => {
+  const handle_signup = async (e) => {
+    e.preventDefault();
     try {
       if (!email || !username || !password) {
         setError("Fill in all Fields");
@@ -24,6 +25,7 @@ function SignUp() {
         username,
         password,
       });
+      console.log(response);
 
       const accessToken = response.data.accessToken;
       setAuth({ accessToken });

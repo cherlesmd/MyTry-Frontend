@@ -13,8 +13,8 @@ const Home = () => {
   return (
     <body className="mx-9 md:mx-52  box-border">
       <main className="font-inter flex flex-col  items-center mt-3">
-        <div className="grid grid-cols-1 h-dvh md:h-[80vh] md:grid-cols-2 gap-12">
-          <div className="mt-6 pt-7 flex flex-col justify-evenly">
+        <div className="grid grid-cols-1 h-dvh md:h-[80vh] md:grid-cols-2 gap-28 md:gap-12 mb-8">
+          <div className="mt-6 md:pt-7 flex flex-col justify-evenly">
             <div className=" mb-12 ">
               <h1 className="text-6xl font-bold">
                 M
@@ -24,7 +24,7 @@ const Home = () => {
                 Try
               </h1>
             </div>
-            <div className="mt-4 pt-4 pb-4 text-xl leading-6">
+            <div className="mt-16 md:mt-6 md:pt-4 pb-4 text-xl leading-6">
               <p className="">
                 Save in one place all the restaurants, cafes, bars, and places
                 you want to try
@@ -47,33 +47,33 @@ const Home = () => {
               </Link>
             </div>
           </div>
-          <div className="mt-6 pt-7 relative">
-            <div class="container">
-              <div class="card">
+          <div className="mt-6  relative h-[80vh]">
+            <div className="container">
+              <div className="card">
                 <img src={polaroid9} width="200px" height="200px" alt="" />
               </div>
-              <div class="card">
+              <div className="card">
                 <img src={polaroid10} width="200px" height="200px" alt="" />
               </div>
-              <div class="card">
+              <div className="card">
                 <img src={polaroid7} width="200px" height="200px" alt="" />
               </div>
-              <div class="card">
+              <div className="card">
                 <img src={polaroid6} width="200px" height="200px" alt="" />
               </div>
-              <div class="card">
+              <div className="card">
                 <img src={polaroid5} width="200px" height="200px" alt="" />
               </div>
-              <div class="card">
+              <div className="card">
                 <img src={polaroid4} width="200px" height="200px" alt="" />
               </div>
-              <div class="card">
+              <div className="card">
                 <img src={polaroid3} width="200px" height="200px" alt="" />
               </div>
-              <div class="card">
+              <div className="card">
                 <img src={polaroid2} width="200px" height="200px" alt="" />
               </div>
-              <div class="card">
+              <div className="card">
                 <img src={polaroid1} width="200px" height="200px" alt="" />
               </div>
             </div>

@@ -46,7 +46,7 @@ const Login = () => {
   }, [persist]);
 
   return (
-    <main className="font-inter flex flex-col  items-center mt-3">
+    <main className="font-inter flex flex-col items-center mt-3">
       <form className="auth-form">
         <div className="field">
           <input

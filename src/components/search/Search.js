@@ -89,7 +89,7 @@ export default function Search({ feature, setFeature, tries, setTries }) {
         </button>
       </div>
       <div
-        className="fixed z-10 h-5/6 bg-white max-w-screen-sm"
+        className=" z-10 h-auto bg-background max-w-screen-sm"
         style={{ display: showOverlay ? "block" : "none" }}
       >
         <form
