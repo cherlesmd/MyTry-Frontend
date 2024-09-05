@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import Header from "../header/Header";
 import DistanceButton from "../button/DistanceButton";
 import MainLayout from "../MainLayout";
@@ -71,7 +71,7 @@ const Dash = () => {
       </Routes>
     </div>
   ) : (
-    <div className="box-border text-center">
+    <Fragment>
       <Header />
       <Routes>
         <Route
@@ -89,7 +89,7 @@ const Dash = () => {
           }
         ></Route>
       </Routes>
-    </div>
+    </Fragment>
   );
 };
 

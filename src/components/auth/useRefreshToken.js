@@ -20,8 +20,6 @@ const useRefreshToken = () => {
 
     } catch (error) {
       console.log(error);
-      localStorage.clear();
-      setAuth({});
     }
   };
 
