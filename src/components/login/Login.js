@@ -24,8 +24,8 @@ const Login = () => {
         password,
       });
 
-      const accessToken = response.data.accessToken;
-      setAuth({ accessToken });
+      const refreshToken = response.data.refreshToken;
+      setAuth({ refreshToken });
 
       navigate("/dash");
     } catch (error) {

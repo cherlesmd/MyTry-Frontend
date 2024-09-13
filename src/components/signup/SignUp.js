@@ -27,8 +27,8 @@ function SignUp() {
       });
       console.log(response);
 
-      const accessToken = response.data.accessToken;
-      setAuth({ accessToken });
+      const refreshToken = response.data.refreshToken;
+      setAuth({ refreshToken });
       console.log(response.data);
 
       navigate("/dash");
