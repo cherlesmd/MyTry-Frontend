@@ -6,7 +6,7 @@ const RequireAuth = () => {
   const { auth } = useContext(AuthContext);
   const location = useLocation();
 
-  return auth.refreshToken ? (
+  return auth.accessToken ? (
     <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />

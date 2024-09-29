@@ -8,7 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { setAuth, persist, setPersist } = useContext(AuthContext);
+  const { auth, setAuth, persist, setPersist } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -24,8 +24,8 @@ const Login = () => {
         password,
       });
 
-      const refreshToken = response.data.refreshToken;
-      setAuth({ refreshToken });
+      const accessToken = response.data.accessToken;
+      setAuth({ accessToken });
 
       navigate("/dash");
     } catch (error) {
@@ -43,7 +43,8 @@ const Login = () => {
 
   useEffect(() => {
     localStorage.setItem("persist", persist);
-  }, [persist]);
+    localStorage.setItem("accessToken", auth);
+  }, [persist, auth]);
 
   return (
     <main className="font-inter flex flex-col items-center mt-3">
