@@ -10,7 +10,7 @@ const useAxios = () => {
   useEffect(() => {
     const authInterceptor = axiosPrivate.interceptors.request.use(
       async (request) => {
-        // await refresh();
+        await refresh();
         return request;
 
       },
