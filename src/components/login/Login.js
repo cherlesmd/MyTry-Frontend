@@ -24,9 +24,7 @@ const Login = () => {
                 password,
             });
 
-            const accessToken = response.data.accessToken;
-            localStorage.setItem("accessToken", auth);
-            setAuth({ accessToken });
+            setAuth(true);
 
             navigate("/dash");
         } catch (error) {

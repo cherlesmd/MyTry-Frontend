@@ -3,9 +3,7 @@ import { createContext, useState } from "react";
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState(
-        JSON.parse(localStorage.getItem("accessToken")) || null,
-    );
+    const [auth, setAuth] = useState(false);
     const [persist, setPersist] = useState(
         JSON.parse(localStorage.getItem("persist")) || false,
     );
