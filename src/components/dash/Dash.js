@@ -4,6 +4,7 @@ import DistanceButton from "../button/DistanceButton";
 import MainLayout from "../MainLayout";
 import { Routes, Route } from "react-router-dom";
 import useAxios from "../auth/useAxios";
+import { axiosInstance } from "../../api/axiosConfig";
 
 const Dash = () => {
   const [tries, setTries] = useState([]);
@@ -38,7 +39,7 @@ const Dash = () => {
 
   const getTries = async (dist) => {
     try {
-      const response = await axiosPrivate({
+      const response = await axiosInstance({
         method: "get",
         url: "/tries",
         params: { longitude: lng, latitude: lat, distance: parseInt(dist) },

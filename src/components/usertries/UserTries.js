@@ -1,4 +1,5 @@
 import { Fragment, useState } from "react";
+import { axiosInstance } from "../../api/axiosConfig";
 import useAxios from "../auth/useAxios";
 import DistanceButton from "../button/DistanceButton";
 import Search from "../search/Search";
@@ -15,7 +16,7 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
       const longitude = tries[index].location.x;
       const latitude = tries[index].location.y;
 
-      await axiosPrivate({
+      await axiosInstance({
         method: "delete",
         url: "/tries",
         params: {

@@ -5,6 +5,7 @@ import {
   config,
 } from "@mapbox/search-js-react";
 import useAxios from "../auth/useAxios";
+import { axiosInstance } from "../../api/axiosConfig";
 
 export default function Search({ feature, setFeature, tries, setTries }) {
   const [showOverlay, setShowOverlay] = useState(false);
@@ -25,7 +26,7 @@ export default function Search({ feature, setFeature, tries, setTries }) {
       const longitude = feature.geometry.coordinates[0];
       const latitude = feature.geometry.coordinates[1];
 
-      const response = await axiosPrivate({
+      const response = await axiosInstance({
         method: "post",
         url: "/tries",
         params: {
