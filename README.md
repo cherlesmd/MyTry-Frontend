@@ -5,4 +5,4 @@
 Your out with friends after dinner but dont want the night to end. You look for places you have saved in your different socials you wanted to try but the long list isn't helping you see whats actually near you so you give up and everyone ends up home early.<br/><br/>
 **Solution**: Consolidate all those places here and see what you have saved in your immediate vicinity and save the night out.<br/>
 (*ignore that Google Maps already has this functionality*)<br/>
-<img height="400" src="/assets/try-dash.png" />
+<img  src="/assets/try-dash.png" />
