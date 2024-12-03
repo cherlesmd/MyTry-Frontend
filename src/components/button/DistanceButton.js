@@ -36,7 +36,7 @@ const DistanceButton = (prop) => {
                   onClick={clickedDistance}
                   className={classNames(
                     active
-                      ? "w-full bg-gray-100 text-gray-900 hover:bg-secondary hover:bg-opacity-50 duration-200"
+                      ? "w-full bg-white text-gray-900 hover:bg-secondary  duration-200"
                       : " w-full text-gray-700",
                     "block py-2 text-sm",
                   )}

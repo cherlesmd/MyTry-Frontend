@@ -47,11 +47,11 @@ const Header = () => {
 
   const ItinContent = () => {
     return (
-      <div className="">
+      <div className="z-50 bg-white opacity-100 h-fit w-fit">
         {Itineraries?.map((item, index) => {
           return (
             <li key={index}>
-              <a href="#">{item}</a>
+              <a href="#" className="list-none">{item}</a>
             </li>
           );
         })}
@@ -72,7 +72,7 @@ const Header = () => {
     return (
       <div onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
-        className="relative h-fit w-fit">
+        className="relative h-fit w-24">
         <a href={href} className="relative">{children}</a>
         <AnimatePresence>
           {showDrop && (
@@ -82,10 +82,8 @@ const Header = () => {
               exit={{ opacity: 0, y: 15 }}
               style={{ translateX: "-50%" }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="absolute left-1/2 top-12">
+              className="z-50 bg-white opacity-100 w-24 absolute left-1/4 top-12">
               <div className="absolute -top-6 left-0 right-0 h-6 bg-transparent" />
-              <div className="absolute left1/2 top- h-4 w-4 z-1
-              -translate-x-1/2  rotate-45"/>
               <ItinContent />
             </motion.div>
           )}
@@ -95,21 +93,21 @@ const Header = () => {
   };
 
   return (
-    <nav className="h-16 flex gap-10 justify-between mt-1 mb-6 mx-4">
+    <nav className="h-16 flex gap-10 justify-between mt-1 mb-6 mx-6">
       <div className="flex items-center flex-shrink-0">
         <Link to="/">
           <p>My Try</p>
         </Link>
       </div>
-      <div className="flex flex-shrink-0 justify-between md:gap-3 items-center">
-        <div className="flex justify-center">
+      <div className="flex flex-shrink-0 justify-between sm:gap-3 items-center">
+        <button type="submit" onClick={handleLogout}>
+          Sign out
+        </button>
+        <div className="flex pl-3 justify-center">
           <DropLink href="#" >
             Itineraries
           </DropLink>
         </div>
-        <button type="submit" onClick={handleLogout}>
-          Sign out
-        </button>
       </div>
     </nav>
   );

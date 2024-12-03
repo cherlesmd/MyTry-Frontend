@@ -5,6 +5,7 @@ import { useContext, useEffect } from "react";
 const RequireAuth = () => {
   const { auth, setAuth } = useContext(AuthContext);
   const location = useLocation();
+
   useEffect(() => {
     const loggedInUser = localStorage.getItem("persist");
     if (loggedInUser) {
