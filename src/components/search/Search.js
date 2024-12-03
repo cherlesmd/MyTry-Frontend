@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import AuthContext from "../auth/AuthPovider";
 import {
   AddressAutofill,
   useConfirmAddress,
   config,
 } from "@mapbox/search-js-react";
-import useAxios from "../auth/useAxios";
 import { axiosInstance } from "../../api/axiosConfig";
 
 export default function Search({ feature, setFeature, tries, setTries }) {
   const [showOverlay, setShowOverlay] = useState(false);
+  const { setAuth } = useContext(AuthContext);
   const [showFormExpanded, setShowFormExpanded] = useState(false);
   const [showValidationText, setShowValidationText] = useState(false);
   const [token, setToken] = useState("");
-  const axiosPrivate = useAxios();
 
   useEffect(() => {
     const accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
@@ -41,6 +41,9 @@ export default function Search({ feature, setFeature, tries, setTries }) {
       setTries(updatedTries);
     } catch (error) {
       console.log(error);
+      if (error.response.status === 403) {
+        setAuth(false);
+      }
     }
   };
 
@@ -58,7 +61,6 @@ export default function Search({ feature, setFeature, tries, setTries }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log();
     submitForm(e.currentTarget.elements.tryName.value);
   };
 

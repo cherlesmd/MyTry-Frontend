@@ -1,18 +1,19 @@
 import { useState, useEffect, Fragment } from "react";
+import { useContext } from "react";
+import AuthContext from "../auth/AuthPovider";
 import Header from "../header/Header";
 import DistanceButton from "../button/DistanceButton";
 import MainLayout from "../MainLayout";
 import { Routes, Route } from "react-router-dom";
-import useAxios from "../auth/useAxios";
 import { axiosInstance } from "../../api/axiosConfig";
 
 const Dash = () => {
+  const { setAuth } = useContext(AuthContext);
   const [tries, setTries] = useState([]);
   const [error, setError] = useState("");
   const [lng, setLng] = useState(null);
   const [lat, setLat] = useState(null);
   const [distance, setDistance] = useState("0");
-  const axiosPrivate = useAxios();
   const [status, setStatus] = useState(false);
 
   useEffect(() => {
@@ -46,7 +47,11 @@ const Dash = () => {
       });
 
       setTries(response.data);
+
     } catch (error) {
+      if (error.response.status === 403) {
+        setAuth(false);
+      }
       console.log(error);
     }
   };

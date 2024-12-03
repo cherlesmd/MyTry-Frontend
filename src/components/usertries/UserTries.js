@@ -1,15 +1,15 @@
-import { Fragment, useState } from "react";
 import { axiosInstance } from "../../api/axiosConfig";
-import useAxios from "../auth/useAxios";
+import { useContext } from "react";
+import AuthContext from "../auth/AuthPovider";
 import DistanceButton from "../button/DistanceButton";
 import Search from "../search/Search";
 import Collapsible from "./Collapsible";
 
 const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
-  const axiosPrivate = useAxios();
+
+  const { setAuth } = useContext(AuthContext);
 
   const deleteTry = async (index) => {
-    console.log(tries[index].location.x);
 
     try {
       const name = tries[index].name;
@@ -29,6 +29,9 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
       const updatedTries = tries.filter((_, i) => i !== index);
       setTries(updatedTries);
     } catch (error) {
+      if (error.response.status === 403) {
+        setAuth(false);
+      }
       console.log(error);
     }
   };

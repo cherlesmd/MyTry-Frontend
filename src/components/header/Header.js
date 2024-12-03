@@ -1,35 +1,73 @@
 import { React, useState } from "react";
 import AuthContext from "../auth/AuthPovider";
 import { useContext } from "react";
-import useAxios from "../auth/useAxios";
+import { axiosInstance } from "../../api/axiosConfig";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Header = () => {
   const { setAuth } = useContext(AuthContext);
-  const axiosPrivate = useAxios();
+  const [Itineraries, setItineraries] = useState(JSON.parse(localStorage.getItem("Itins") || []));
 
   const handleLogout = async () => {
-    await axiosPrivate({
+    await axiosInstance({
       method: "post",
       url: "/auth/logout",
     });
     window.localStorage.clear();
-    setAuth({});
+    setAuth(false);
   };
+
+  const newItinerary = async (itinerary) => {
+    try {
+      await axiosInstance({
+        method: "post",
+        url: "/user",
+        params: {
+          itinerary
+        },
+      });
+
+      const updatedItins = [...Itineraries, itinerary];
+      localStorage.setItem("Itins", JSON.stringify(updatedItins))
+      setItineraries(updatedItins);
+
+    } catch (error) {
+      if (error.response.status === 403) {
+        setAuth(false);
+      }
+      console.log("Failed to add");
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    newItinerary(e.currentTarget.elements.Itin.value)
+  }
 
   const ItinContent = () => {
     return (
-      <div>
-        <a href="#">Anniversary</a>
-        <a href="#">New York Trip</a>
+      <div className="">
+        {Itineraries?.map((item, index) => {
+          return (
+            <li key={index}>
+              <a href="#">{item}</a>
+            </li>
+          );
+        })}
+        <form onSubmit={handleSubmit}>
+          <input id="Itin" className="shadow appearance-none border  w-full py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="new Itinerary"
+            onKeyDown={e =>
+              e.key === "Enter" && handleSubmit} />
+        </form>
       </div>
     )
   }
 
-  const DropLink = ({ children, href, DropContent }) => {
+  const DropLink = ({ children, href }) => {
     const [open, setOpen] = useState(false);
-    const showDrop = DropContent && open;
+    const showDrop = ItinContent && open;
 
     return (
       <div onMouseEnter={() => setOpen(true)}
@@ -46,9 +84,9 @@ const Header = () => {
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="absolute left-1/2 top-12">
               <div className="absolute -top-6 left-0 right-0 h-6 bg-transparent" />
-              <div className="absolute left1/2 top- h-4 w-4 
+              <div className="absolute left1/2 top- h-4 w-4 z-1
               -translate-x-1/2  rotate-45"/>
-              <DropContent />
+              <ItinContent />
             </motion.div>
           )}
         </AnimatePresence>
@@ -65,7 +103,7 @@ const Header = () => {
       </div>
       <div className="flex flex-shrink-0 justify-between md:gap-3 items-center">
         <div className="flex justify-center">
-          <DropLink href="#" DropContent={ItinContent}>
+          <DropLink href="#" >
             Itineraries
           </DropLink>
         </div>
