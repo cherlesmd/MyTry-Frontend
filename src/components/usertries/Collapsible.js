@@ -33,7 +33,7 @@ const Collapsible = ({ tryName, address, itineraries, deleteTry, addItinerary, i
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    addItinerary(e.currentTarget.elements.Itin.value, index)
+    addItinerary(e.currentTarget.elements.Itin.value, tryName, index)
   }
 
   return (

@@ -38,6 +38,7 @@ const Dash = () => {
     fetchLocation();
   }, []);
 
+
   const getTries = async (dist) => {
     try {
       const response = await axiosInstance({
@@ -78,7 +79,9 @@ const Dash = () => {
     </div>
   ) : (
     <Fragment>
-      <Header />
+      <Header
+        setTries={setTries}
+      />
       <Routes>
         <Route
           path="/"

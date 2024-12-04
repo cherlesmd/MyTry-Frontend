@@ -37,15 +37,12 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
     }
   };
 
-  const newItinerary = async (itinerary, index) => {
+  const newItinerary = async (itinerary, name, index) => {
     try {
-      /*await axiosInstance({
+      await axiosInstance({
         method: "post",
-        url: "/user",
-        params: {
-          itinerary
-        },
-      });*/
+        url: `/tries/${itinerary}/${name}`,
+      });
 
       const updatedTryItins = [...tries];
       updatedTryItins[index] = { ...updatedTryItins[index], itineraries: [...updatedTryItins[index].itineraries, itinerary] }
