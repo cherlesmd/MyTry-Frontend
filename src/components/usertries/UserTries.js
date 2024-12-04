@@ -1,5 +1,5 @@
-import { axiosInstance } from "../../api/axiosConfig";
 import { useContext } from "react";
+import { axiosInstance } from "../../api/axiosConfig";
 import AuthContext from "../auth/AuthPovider";
 import DistanceButton from "../button/DistanceButton";
 import Search from "../search/Search";
@@ -9,6 +9,7 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
 
   const { setAuth } = useContext(AuthContext);
 
+  console.log(tries);
   const deleteTry = async (index) => {
 
     try {
@@ -36,6 +37,30 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
     }
   };
 
+  const newItinerary = async (itinerary, index) => {
+    try {
+      /*await axiosInstance({
+        method: "post",
+        url: "/user",
+        params: {
+          itinerary
+        },
+      });*/
+
+      const updatedTryItins = [...tries];
+      updatedTryItins[index] = { ...updatedTryItins[index], itineraries: [...updatedTryItins[index].itineraries, itinerary] }
+      setTries(updatedTryItins);
+
+    } catch (error) {
+      if (error.response.status === 403) {
+        setAuth(false);
+      }
+      console.log("Failed to add");
+    }
+  }
+
+
+
   return (
     <div className="">
       <ul>
@@ -53,7 +78,9 @@ const UserTries = ({ tries, setTries, getDistance, feature, setFeature }) => {
                 <Collapsible
                   tryName={item.name}
                   address={item.address}
+                  itineraries={item.itineraries}
                   deleteTry={deleteTry}
+                  addItinerary={newItinerary}
                   index={index}
                 />
               </li>

@@ -5,7 +5,7 @@ import { axiosInstance } from "../../api/axiosConfig";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
-const Header = () => {
+const Header = ({ setTries }) => {
   const { setAuth } = useContext(AuthContext);
   const [Itineraries, setItineraries] = useState(JSON.parse(localStorage.getItem("Itins") || []));
 
@@ -17,6 +17,16 @@ const Header = () => {
     window.localStorage.clear();
     setAuth(false);
   };
+
+  const getItinerary = async (itinerary) => {
+    try {
+      const response = await axiosInstance({ method: "get", url: `/tries/${itinerary}` });
+      console.log(response);
+      setTries(response.data);
+    } catch (error) {
+      console.log("Couldnt retrieve itinerary");
+    }
+  }
 
   const newItinerary = async (itinerary) => {
     try {
@@ -50,8 +60,8 @@ const Header = () => {
       <div className="z-50 bg-white opacity-100 h-fit w-fit">
         {Itineraries?.map((item, index) => {
           return (
-            <li key={index}>
-              <a href="#" className="list-none">{item}</a>
+            <li key={index} className="list-none">
+              <button onClick={() => getItinerary(item)}>{item}</button>
             </li>
           );
         })}
