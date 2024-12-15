@@ -10,7 +10,7 @@ import { axiosInstance } from "../../api/axiosConfig";
 const Dash = () => {
   const { setAuth } = useContext(AuthContext);
   const [tries, setTries] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
   const [lng, setLng] = useState(null);
   const [lat, setLat] = useState(null);
   const [distance, setDistance] = useState("0");
@@ -47,7 +47,13 @@ const Dash = () => {
         params: { longitude: lng, latitude: lat, distance: parseInt(dist) },
       });
 
-      setTries(response.data);
+      if (response.status === 204) {
+        setTries([]);
+        setError(true);
+      } else {
+        setTries(response.data);
+      }
+
 
     } catch (error) {
       if (error.response.status === 403) {
@@ -82,6 +88,13 @@ const Dash = () => {
       <Header
         setTries={setTries}
       />
+      {error ? (
+        <div className="mx-6">
+          <p>Error: Unable to obtain current geolocation</p>
+        </div>
+      ) : (
+        <div />
+      )}
       <Routes>
         <Route
           path="/"
